@@ -1,0 +1,5 @@
+---
+description: solo-product-squad 전체 워크플로우 안내 및 모호한 요청 라우팅
+---
+
+~/.claude/plugins/cache/{marketplace-name}/{plugin-name}/ 하위 최신 버전 디렉토리의 skills/core/SKILL.md 파일을 읽고 실행하세요.

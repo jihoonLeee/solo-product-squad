@@ -1,0 +1,24 @@
+# 비밀값 파일 (절대 커밋 금지)
+.env
+.env.*
+*.secret
+secrets/
+*.key
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 에디터
+.vscode/
+.idea/
+*.swp
+
+# 런타임 생성 파일
+__pycache__/
+*.pyc
+node_modules/
+
+# 산출물 (사용자 프로젝트 산출물 — 선택적으로 제외)
+# output/ 와 contracts/ 는 버전 관리 포함 (팀 공유 목적)

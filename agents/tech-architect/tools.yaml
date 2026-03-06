@@ -1,0 +1,20 @@
+tools:
+  - name: file_read
+    description: "기존 산출물 읽기 (mvp-scope.md, ux/ia.md, ux/wireframes.md)"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "읽을 파일 경로"
+
+  - name: file_write
+    description: "계약 문서 저장"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "저장할 파일 경로 (contracts/openapi.yaml, domain-model.md, error-codes.md, authz.md)"
+      content:
+        type: string
+        required: true
+        description: "저장할 내용 (비밀값 포함 금지)"

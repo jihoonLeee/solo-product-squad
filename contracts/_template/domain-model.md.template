@@ -1,0 +1,33 @@
+# 도메인 모델
+
+## 핵심 엔티티
+
+<!-- tech-architect가 실제 도메인 엔티티로 교체 -->
+
+### 예시: User
+
+| 속성 | 타입 | 필수 | 설명 |
+|------|------|:----:|------|
+| id | UUID | O | 고유 식별자 |
+| email | string | O | 이메일 (유니크) |
+| createdAt | datetime | O | 생성일시 |
+| updatedAt | datetime | O | 수정일시 |
+
+**도메인 규칙:**
+- 이메일은 중복 불가
+- 비밀번호는 bcrypt로 해시 저장
+
+## 엔티티 관계
+
+```
+User ──1:N──> Post
+Post ──1:N──> Comment
+User ──M:N──> Tag (through UserTag)
+```
+
+## 불변 조건
+
+- User.email은 변경 불가 (수정 시 새 계정 생성)
+- Post 삭제 시 Comment 연쇄 삭제
+
+<!-- tech-architect가 실제 비즈니스 도메인에 맞게 정의 -->

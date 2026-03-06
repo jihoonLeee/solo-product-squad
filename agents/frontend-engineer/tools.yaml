@@ -1,0 +1,40 @@
+tools:
+  - name: file_read
+    description: "계약 문서 및 UX 산출물 읽기"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "읽을 파일 경로"
+
+  - name: file_write
+    description: "구현 계획 및 코드 파일 저장"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "저장할 파일 경로"
+      content:
+        type: string
+        required: true
+        description: "저장할 내용 (비밀값 하드코딩 금지)"
+
+  - name: code_execute
+    description: "빌드 및 테스트 실행 (의존성 설치, 빌드, 테스트 목적만)"
+    parameters:
+      command:
+        type: string
+        required: true
+        description: "실행할 명령어 (npm install, npm run build, npm test 등)"
+
+  - name: library_docs
+    description: "라이브러리 공식 문서 검색 (context7 MCP)"
+    parameters:
+      libraryName:
+        type: string
+        required: true
+        description: "검색할 라이브러리명 (예: next.js, react, tailwindcss)"
+      query:
+        type: string
+        required: true
+        description: "검색 질의"

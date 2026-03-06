@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "solo-product-squad",
+  "owner": {
+    "name": "jihoo"
+  },
+  "plugins": [
+    {
+      "name": "solo-product-squad",
+      "version": "0.0.1",
+      "source": "./"
+    }
+  ]
+}

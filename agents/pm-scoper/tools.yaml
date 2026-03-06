@@ -1,0 +1,20 @@
+tools:
+  - name: file_read
+    description: "기존 산출물 읽기 (idea-brief.md, validation-plan.md)"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "읽을 파일 경로"
+
+  - name: file_write
+    description: "MVP 스코프 문서 저장"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "저장할 파일 경로 (output/mvp-scope.md)"
+      content:
+        type: string
+        required: true
+        description: "저장할 내용"

@@ -1,0 +1,31 @@
+# 권한 규격
+
+## 역할(Role) 정의
+
+| 역할 | 설명 |
+|------|------|
+| admin | 전체 관리자 |
+| user | 일반 사용자 |
+| guest | 비인증 방문자 |
+
+<!-- tech-architect가 실제 비즈니스에 맞게 역할 추가/수정 -->
+
+## 인증 플로우
+
+```
+1. 사용자 로그인 → JWT 발급 (Access Token + Refresh Token)
+2. API 요청 시 Authorization: Bearer {access_token} 헤더 포함
+3. Access Token 만료 → Refresh Token으로 갱신
+4. Refresh Token 만료 → 재로그인
+```
+
+## 리소스별 권한 매트릭스
+
+| 리소스 | 액션 | admin | user | guest |
+|--------|------|:-----:|:----:|:-----:|
+| 예시 리소스 | read | O | O | O |
+| 예시 리소스 | create | O | O | X |
+| 예시 리소스 | update | O | 본인만 | X |
+| 예시 리소스 | delete | O | 본인만 | X |
+
+<!-- tech-architect가 실제 리소스와 액션으로 교체 -->

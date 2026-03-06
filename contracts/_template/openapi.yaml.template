@@ -1,0 +1,45 @@
+openapi: "3.1.0"
+info:
+  title: "{제품명} API"
+  version: "0.0.1"
+  description: "{제품 설명}"
+
+servers:
+  - url: "http://localhost:3000/api"
+    description: "개발 환경"
+  - url: "https://{your-domain}/api"
+    description: "프로덕션"
+
+# 인증 방식 정의
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: "AUTH_001"
+        message:
+          type: string
+          example: "인증이 필요합니다"
+
+# 전역 보안 적용 (개별 엔드포인트에서 override 가능)
+security:
+  - bearerAuth: []
+
+paths:
+  # 예시 엔드포인트 — tech-architect가 실제 엔드포인트로 교체
+  /health:
+    get:
+      summary: "헬스 체크"
+      security: []
+      responses:
+        "200":
+          description: "정상"

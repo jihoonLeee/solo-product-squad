@@ -1,0 +1,20 @@
+tools:
+  - name: file_read
+    description: "구현 산출물 및 계약 문서 읽기"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "읽을 파일 경로"
+
+  - name: file_write
+    description: "테스트 계획 및 릴리즈 체크리스트 저장"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "저장할 파일 경로 (output/qa/test-plan.md, test-cases.md, release-checklist.md)"
+      content:
+        type: string
+        required: true
+        description: "저장할 내용"

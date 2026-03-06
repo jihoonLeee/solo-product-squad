@@ -1,0 +1,20 @@
+tools:
+  - name: file_read
+    description: "기존 산출물 및 관련 문서 읽기"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "읽을 파일 경로"
+
+  - name: file_write
+    description: "아이디어 브리프 및 검증 계획 저장"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "저장할 파일 경로 (output/idea-brief.md, output/validation-plan.md)"
+      content:
+        type: string
+        required: true
+        description: "저장할 내용"
