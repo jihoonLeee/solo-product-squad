@@ -1,0 +1,9 @@
+alerts:
+  - name: api-error-rate
+    metric: api.error_rate
+    threshold: ">= 5% for 5m"
+    channel: slack-ops
+  - name: login-failure-spike
+    metric: auth.login_failure_rate
+    threshold: ">= 20% for 10m"
+    channel: slack-ops

@@ -1,0 +1,31 @@
+# Context Index
+
+## Read Order
+1. `output/project-state.md`
+2. `output/stage-handoff.md`
+3. Current stage artifact(s)
+4. Immediate upstream artifact(s)
+5. `contracts/` only when implementation or API alignment is needed
+
+## Stage Map
+- validate: user brief, `output/project-state.md`
+- plan: `output/idea-brief.md`, `output/validation-plan.md`
+- design: `output/mvp-scope.md`
+- frontend-design: `output/mvp-scope.md`, `output/ux/ia.md`, `output/ux/wireframes.md`, `output/ux/design-tokens.md`
+- architect: `output/mvp-scope.md`, `output/ux/`
+- build-frontend: `contracts/openapi.yaml`, `output/ux/`, `output/mvp-scope.md`, `output/frontend/approval.md`
+- build-backend: `contracts/`, `output/mvp-scope.md`, `output/backend/approval.md`
+- test: `contracts/`, `output/frontend/`, `output/backend/`
+- review: `output/qa/`, `output/frontend/`, `output/backend/`
+- operate: `output/qa/release-checklist.md`, `output/review/findings.md`, `output/backend/plan.md`
+
+## Source Of Truth
+- product scope: `output/mvp-scope.md`
+- architecture and API: `contracts/`
+- implementation planning: `output/frontend/`, `output/backend/`
+- release readiness: `output/qa/`, `output/review/`
+
+## Compact Rules
+- read at most 5 files before producing the first draft
+- expand to broader docs only when conflicts or gaps are found
+- update `output/stage-handoff.md` when a stage ends

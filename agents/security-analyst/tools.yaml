@@ -1,0 +1,20 @@
+tools:
+  - name: file_read
+    description: "코드 파일 및 설정 파일 보안 검토용 읽기"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "읽을 파일 경로 (소스코드, 환경설정, API 계약 등)"
+
+  - name: file_write
+    description: "보안 분석 결과 저장"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "저장할 파일 경로 (output/security/findings.md)"
+      content:
+        type: string
+        required: true
+        description: "심각도별 취약점 목록 및 수정 권고"

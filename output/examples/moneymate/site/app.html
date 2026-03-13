@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyMate Demo App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="theme-paper app-body">
+    <div class="page-shell app-shell">
+      <header class="topbar app-topbar">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">M</span>
+          <span class="brand-copy">
+            <strong>MoneyMate</strong>
+            <small>March 2026 Demo</small>
+          </span>
+        </a>
+        <div class="app-actions">
+          <label class="month-picker">
+            <span>Month</span>
+            <select id="month-select">
+              <option>2026-03</option>
+              <option>2026-02</option>
+              <option>2026-01</option>
+            </select>
+          </label>
+          <a class="nav-cta" href="./index.html">랜딩 보기</a>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <section class="app-hero reveal-up">
+          <div>
+            <p class="eyebrow">WELCOME BACK, JIHEE</p>
+            <h1>이번 달은 아직 안전합니다. 다만 식비 속도는 빠릅니다.</h1>
+          </div>
+          <div class="hero-actions">
+            <button class="button button-primary" data-tab-target="expenses">
+              지출 입력
+            </button>
+            <button class="button button-secondary" data-tab-target="budget">
+              예산 조정
+            </button>
+          </div>
+        </section>
+
+        <section class="summary-grid reveal-up delay-1">
+          <article class="summary-card summary-card-primary">
+            <span>남은 예산</span>
+            <strong id="remaining-budget">₩1,128,000</strong>
+            <p id="pace-copy">지금 속도면 예산 범위 안에서 마감할 가능성이 높습니다.</p>
+          </article>
+          <article class="summary-card">
+            <span>총지출</span>
+            <strong id="spent-total">₩1,372,000</strong>
+            <p>전주 대비 12% 감소</p>
+          </article>
+          <article class="summary-card warm">
+            <span>고정비</span>
+            <strong>₩640,000</strong>
+            <p>구독 5건 추적 중</p>
+          </article>
+        </section>
+
+        <div class="tab-strip reveal-up delay-2">
+          <button class="tab-chip is-active" data-tab="dashboard">Dashboard</button>
+          <button class="tab-chip" data-tab="expenses">Expenses</button>
+          <button class="tab-chip" data-tab="budget">Budget</button>
+          <button class="tab-chip" data-tab="insights">Insights</button>
+        </div>
+
+        <section class="app-grid">
+          <div class="app-panel tab-panel is-active" data-panel="dashboard">
+            <div class="panel-grid">
+              <article class="panel-card chart-card reveal-up">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">CATEGORY SPEND</p>
+                    <h2>카테고리별 소비 요약</h2>
+                  </div>
+                  <span class="chip chip-soft">Updated today</span>
+                </div>
+                <div class="bars" id="category-bars">
+                  <div class="bar-row">
+                    <span>식비</span>
+                    <div class="bar-track"><i style="width: 68%"></i></div>
+                    <strong>₩420,000</strong>
+                  </div>
+                  <div class="bar-row">
+                    <span>업무</span>
+                    <div class="bar-track"><i style="width: 52%"></i></div>
+                    <strong>₩300,000</strong>
+                  </div>
+                  <div class="bar-row">
+                    <span>교통</span>
+                    <div class="bar-track"><i style="width: 24%"></i></div>
+                    <strong>₩138,000</strong>
+                  </div>
+                  <div class="bar-row">
+                    <span>구독</span>
+                    <div class="bar-track"><i style="width: 41%"></i></div>
+                    <strong>₩250,000</strong>
+                  </div>
+                </div>
+              </article>
+
+              <article class="panel-card insights-card reveal-up delay-1">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">WEEKLY COACH</p>
+                    <h2>이번 주 행동 제안</h2>
+                  </div>
+                </div>
+                <ul class="insight-list" id="insight-list">
+                  <li>
+                    <strong>식비</strong>
+                    <p>수요일 이후 외식 빈도를 한 번만 줄여도 예산 범위로 돌아옵니다.</p>
+                  </li>
+                  <li>
+                    <strong>구독</strong>
+                    <p>이번 주 만료 예정 구독 2건을 검토하면 다음 달 고정비가 안정됩니다.</p>
+                  </li>
+                  <li>
+                    <strong>업무비</strong>
+                    <p>업무 카테고리는 정상 범위입니다. 이번 주는 유지 전략이 좋습니다.</p>
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <div class="app-panel tab-panel" data-panel="expenses">
+            <div class="panel-grid two-column">
+              <article class="panel-card reveal-up">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">RECENT EXPENSES</p>
+                    <h2>지출 내역</h2>
+                  </div>
+                </div>
+                <div class="expense-list" id="expense-list">
+                  <article class="expense-item">
+                    <div>
+                      <strong>점심 미팅</strong>
+                      <span>식비 · 2026-03-06</span>
+                    </div>
+                    <em>₩28,000</em>
+                  </article>
+                  <article class="expense-item">
+                    <div>
+                      <strong>Figma 구독</strong>
+                      <span>구독 · 2026-03-05</span>
+                    </div>
+                    <em>₩24,000</em>
+                  </article>
+                  <article class="expense-item">
+                    <div>
+                      <strong>택시 이동</strong>
+                      <span>교통 · 2026-03-05</span>
+                    </div>
+                    <em>₩19,800</em>
+                  </article>
+                </div>
+              </article>
+
+              <article class="panel-card warm reveal-up delay-1">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">QUICK ADD</p>
+                    <h2>빠른 지출 입력</h2>
+                  </div>
+                </div>
+                <form class="expense-form" id="expense-form">
+                  <label>
+                    항목명
+                    <input type="text" id="expense-title" placeholder="예: 저녁 식사" required />
+                  </label>
+                  <label>
+                    카테고리
+                    <select id="expense-category">
+                      <option>식비</option>
+                      <option>업무</option>
+                      <option>교통</option>
+                      <option>구독</option>
+                    </select>
+                  </label>
+                  <label>
+                    금액
+                    <input type="number" id="expense-amount" min="1000" step="1000" value="18000" required />
+                  </label>
+                  <label>
+                    날짜
+                    <input type="date" id="expense-date" value="2026-03-08" required />
+                  </label>
+                  <button class="button button-primary" type="submit">지출 추가</button>
+                  <p class="form-hint" id="form-hint">입력 후 대시보드 수치가 즉시 갱신됩니다.</p>
+                </form>
+              </article>
+            </div>
+          </div>
+
+          <div class="app-panel tab-panel" data-panel="budget">
+            <article class="panel-card reveal-up">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">BUDGET SETTING</p>
+                  <h2>월간 예산 조정</h2>
+                </div>
+              </div>
+              <form class="budget-form" id="budget-form">
+                <label>
+                  이번 달 예산 한도
+                  <input type="number" id="budget-limit" min="500000" step="10000" value="2500000" />
+                </label>
+                <div class="budget-preview">
+                  <span>예상 잔여 예산</span>
+                  <strong id="budget-preview-value">₩1,128,000</strong>
+                </div>
+                <button class="button button-primary" type="submit">예산 저장</button>
+              </form>
+            </article>
+          </div>
+
+          <div class="app-panel tab-panel" data-panel="insights">
+            <article class="panel-card deep reveal-up">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">INSIGHT BOARD</p>
+                  <h2>이번 주 재무 코치 리포트</h2>
+                </div>
+              </div>
+              <div class="insight-board">
+                <blockquote>
+                  "이번 주 식비 속도만 조금 눌러도, 이번 달은 안전하게 마무리할
+                  수 있습니다."
+                </blockquote>
+                <div class="insight-grid">
+                  <article>
+                    <span>위험 구간</span>
+                    <strong>식비</strong>
+                    <p>주 후반 지출 비중이 높습니다.</p>
+                  </article>
+                  <article>
+                    <span>안정 구간</span>
+                    <strong>업무비</strong>
+                    <p>예산 대비 지출 속도가 정상입니다.</p>
+                  </article>
+                  <article>
+                    <span>이번 주 제안</span>
+                    <strong>구독 점검</strong>
+                    <p>중복 구독 1건만 정리해도 다음 달 고정비가 줄어듭니다.</p>
+                  </article>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

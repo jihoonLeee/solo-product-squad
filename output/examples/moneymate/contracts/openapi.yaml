@@ -1,0 +1,122 @@
+openapi: "3.1.0"
+info:
+  title: "MoneyMate API"
+  version: "0.1.0"
+  description: "프리랜서와 1인 사업자를 위한 구독형 개인 재무 코치 서비스 API"
+
+servers:
+  - url: "http://localhost:3000/api"
+    description: "개발 환경"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Expense:
+      type: object
+      required: [id, category, amount, spentAt]
+      properties:
+        id:
+          type: string
+        category:
+          type: string
+        amount:
+          type: number
+        spentAt:
+          type: string
+          format: date
+        note:
+          type: string
+    BudgetStatus:
+      type: object
+      required: [month, totalSpent, budgetLimit, remaining]
+      properties:
+        month:
+          type: string
+        totalSpent:
+          type: number
+        budgetLimit:
+          type: number
+        remaining:
+          type: number
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+
+security:
+  - bearerAuth: []
+
+paths:
+  /health:
+    get:
+      summary: "헬스 체크"
+      security: []
+      responses:
+        "200":
+          description: "정상"
+
+  /auth/signup:
+    post:
+      summary: "이메일 회원가입"
+      security: []
+      responses:
+        "201":
+          description: "가입 완료"
+
+  /auth/login:
+    post:
+      summary: "로그인"
+      security: []
+      responses:
+        "200":
+          description: "로그인 성공"
+
+  /expenses:
+    get:
+      summary: "지출 목록 조회"
+      responses:
+        "200":
+          description: "조회 성공"
+    post:
+      summary: "지출 등록"
+      responses:
+        "201":
+          description: "등록 성공"
+
+  /expenses/{expenseId}:
+    patch:
+      summary: "지출 수정"
+      responses:
+        "200":
+          description: "수정 성공"
+    delete:
+      summary: "지출 삭제"
+      responses:
+        "204":
+          description: "삭제 성공"
+
+  /budget/status:
+    get:
+      summary: "월간 예산 현황 조회"
+      responses:
+        "200":
+          description: "조회 성공"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BudgetStatus"
+
+  /coach/insights:
+    get:
+      summary: "주간 재무 인사이트 조회"
+      responses:
+        "200":
+          description: "조회 성공"

@@ -32,8 +32,11 @@ handoff:
     when: "운영 중 코드 버그 발견"
     reason: "코드 수정은 backend-engineer 담당"
 
+  - target: pm-scoper
+    when: "운영 리뷰가 끝나고 다음 반복 사이클을 계획할 때"
+    reason: "다음 스코프 재정의와 우선순위 설정은 pm-scoper가 담당"
 persona:
-  profile:
+profile:
     name: "윤성호"
     nickname: "옵스"
     role: "운영 매니저"

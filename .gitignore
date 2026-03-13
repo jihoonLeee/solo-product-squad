@@ -22,3 +22,6 @@ node_modules/
 
 # 산출물 (사용자 프로젝트 산출물 — 선택적으로 제외)
 # output/ 와 contracts/ 는 버전 관리 포함 (팀 공유 목적)
+
+# OMC 상태 파일
+.omc/

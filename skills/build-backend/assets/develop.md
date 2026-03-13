@@ -1,29 +1,25 @@
-/oh-my-claudecode:ralph
-개발 계획서에 따라 백엔드를 개발 하세요.
-# 요구사항
+백엔드 구현 지침
+
+# 입력
 - Base 디렉토리: {{Base 디렉토리}}
 - 개발 계획서: {{Base 디렉토리}}/{{개발 계획서 파일 경로}}
+
+# 구현 원칙
+- contracts/openapi.yaml과 contracts/domain-model.md를 단일 소스로 취급할 것
+- 인증, 인가, 입력 검증, 오류 응답 형식을 누락하지 말 것
+- 비밀값을 코드, 예제, README에 하드코딩하지 말 것
+- 1인 유지보수 가능한 단순 구조를 우선할 것
+- 계약 변경이 필요하면 임의 수정하지 말고 차이를 보고할 것
+
+# 검증
+- 최소 1개 이상의 검증을 수행할 것: 테스트, 빌드, 실행 확인 중 가능한 항목
+- 검증이 실패하면 실패 로그 요약과 원인을 함께 보고할 것
+
 # README.md
 - 아키텍처 다이어그램
 - 디렉토리 구조
 - 소스 코드 설명 (주요 함수, 처리 흐름)
-- 가상환경 설정 및 실행 방법
-- MCP 서버인 경우 Claude Code에 추가 방법 안내
-  ```
-  # Streaming HTTP 일때
-  claude mcp add --transport http [-s local|user|project] {MCP서버명} {MCP서버 주소}
+- 실행 방법
 
-  # stdio일때
-  claude mcp add-json {MCP서버명} '{
-    "type": "stdio",
-    "command": "python",
-    "args": ["{MCP 서버 파일 경로}"],
-    "env": {
-      "{Key}": "{Value}"
-    }
-  }' [-s local|user|project]
-  ```
-
-# 결과파일
+# 결과
 - {{Base 디렉토리}}/
-- 'src' 디렉토리 하위에 생성하지 말것

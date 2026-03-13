@@ -1,0 +1,36 @@
+# 디자인 토큰
+
+## Direction Summary
+- 제품 톤:
+- 시각 원칙:
+
+## Colors
+- `--color-primary`:
+- `--color-secondary`:
+- `--color-surface`:
+- `--color-text`:
+- `--color-success`:
+- `--color-warning`:
+- `--color-danger`:
+
+## Typography
+- display:
+- heading:
+- body:
+- mono:
+
+## Spacing
+- `--space-1`:
+- `--space-2`:
+- `--space-3`:
+- `--space-4`:
+
+## Radius / Border / Shadow
+- radius:
+- border:
+- shadow:
+
+## Breakpoints
+- mobile:
+- tablet:
+- desktop:

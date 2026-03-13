@@ -1,0 +1,20 @@
+tools:
+  - name: file_read
+    description: "review 대상 산출물과 계약 문서를 읽음"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "읽을 파일 경로"
+
+  - name: file_write
+    description: "review findings 문서를 저장함"
+    parameters:
+      path:
+        type: string
+        required: true
+        description: "저장할 파일 경로"
+      content:
+        type: string
+        required: true
+        description: "저장할 내용"
