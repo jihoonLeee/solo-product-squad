@@ -33,6 +33,6 @@ Turn approved UX and contract artifacts into production frontend code with recor
 - Record at least one verification result alongside the implementation.
 
 ## Must Do
-- Obey project overlay rules in boricori-place/CLAUDE.md.
+- Read the active project overlay (e.g. `boricori-place/CLAUDE.md`) for project-specific rules before implementing.
 - Keep approval and evidence explicit.
 - Hand off to QA only when the build is genuinely testable.

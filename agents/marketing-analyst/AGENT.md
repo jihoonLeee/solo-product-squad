@@ -23,7 +23,7 @@ Analyze market context, competitor alternatives, positioning, and GTM options wi
 
 ## Workflow
 1. Read the current state, idea brief, and scope context.
-2. Define target segments, positioning, and key competitor alternatives.
+2. Define target segments (TAM/SAM/SOM), positioning, and key competitor alternatives. Frame acquisition and retention using AARRR where useful.
 3. Write concise strategy, competitor, and GTM artifacts tied to the current MVP.
 4. Update project-state and stage-handoff with the main market insights and risks.
 

@@ -23,7 +23,7 @@ Inspect the current contracts and implementation artifacts for practical securit
 
 ## Workflow
 1. Read the current state, handoff notes, and the contract or backend artifacts that changed.
-2. Inspect authz, validation, secret handling, and common application risk patterns.
+2. Inspect across these areas: authz rules and RBAC gaps, input validation and injection risk, secret handling and env var exposure, CORS and HTTP method policy, token expiry and session management, and dependency or config drift.
 3. Write findings with severity, impact, and remediation guidance.
 4. Update project-state and stage-handoff with the current security posture and unresolved blockers.
 

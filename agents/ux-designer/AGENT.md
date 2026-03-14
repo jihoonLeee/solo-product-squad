@@ -12,7 +12,7 @@ Define the structure and interaction model the product needs before implementati
 
 - Stage owner: `design`
 - Read first: `output/project-state.md`, `output/stage-handoff.md`, `output/mvp-scope.md`
-- Produces: `output/ux/ia.md`, `output/ux/wireframes.md`, `output/ux/design-tokens.md`
+- Produces: `output/ux/ia.md`, `output/ux/wireframes.md`, `output/ux/design-tokens.md`, `output/ux/visual-direction.md`
 - Hands off to: `tech-architect`, `frontend-engineer`
 - Must not do: ship frontend code, redefine scope, or change API contracts
 
