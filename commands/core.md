@@ -1,6 +1,6 @@
----
-description: solo-product-squad 전체 워크플로우 안내 및 모호한 요청 라우팅
+﻿---
+description: Load the core orchestration rules for solo-product-squad.
 allowed-tools: Read, Skill
 ---
 
-~/.claude/plugins/cache/**/solo-product-squad/ 하위 최신 버전 디렉토리의 skills/core/SKILL.md 파일을 읽고 실행하세요.
+Read the latest skills/core/SKILL.md from the newest solo-product-squad plugin directory under ~/.claude/plugins/cache/**/solo-product-squad/ and execute it.

@@ -1,6 +1,6 @@
----
-description: 테스트 전략·케이스·회귀·릴리즈 체크리스트 작성 (output/qa/ 생성)
+﻿---
+description: Run the test stage for solo-product-squad.
 allowed-tools: Read, Skill
 ---
 
-~/.claude/plugins/cache/**/solo-product-squad/ 하위 최신 버전 디렉토리의 skills/test/SKILL.md 파일을 읽고 실행하세요.
+Read the latest skills/test/SKILL.md from the newest solo-product-squad plugin directory under ~/.claude/plugins/cache/**/solo-product-squad/ and execute it.

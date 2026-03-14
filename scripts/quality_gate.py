@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Run standard quality checks and persist QA evidence."""
 
 from __future__ import annotations
@@ -15,10 +15,10 @@ from pathlib import Path
 EXECUTION_HEADING = "## 실행한 검증"
 SUMMARY_HEADING = "## 결과 요약"
 RISK_HEADING = "## 남은 리스크"
-FINAL_DECISION_HEADING = "## 최종 판정"
+FINAL_DECISION_HEADING = "## 최종 결정"
 FEATURE_HEADING = "## 기능 검증"
 SECURITY_HEADING = "## 보안 검증"
-OPS_HEADING = "## 성능 및 운영"
+OPS_HEADING = "## 운영 준비"
 EVIDENCE_HEADING = "## 실행 증거"
 BLOCKED_HEADING = "## BLOCKED 사유"
 
@@ -86,9 +86,11 @@ def trim_output(output: bytes | str | None, max_lines: int) -> str:
     cleaned = decode_output(output).replace("\x00", "").strip()
     if not cleaned:
         return "(no output)"
+
     lines = cleaned.splitlines()
     if len(lines) <= max_lines:
         return "\n".join(lines)
+
     omitted = len(lines) - max_lines
     return "\n".join([f"... ({omitted} lines omitted)", *lines[-max_lines:]])
 
@@ -110,6 +112,7 @@ def run_check(check: Check, project_dir: Path, max_output_lines: int) -> Result:
         combined = stdout_text
         if stderr_text:
             combined = f"{stdout_text}\n[stderr]\n{stderr_text}".strip()
+
         status = "PASS" if completed.returncode == 0 else "FAIL"
         return Result(
             label=check.label,
@@ -139,28 +142,28 @@ def build_evidence_markdown(root: Path, project_dir: Path, results: list[Result]
 
     if failed:
         gate_signal = "BLOCKED"
-        summary_reason = f"자동 검증 실패: {', '.join(failed)}"
+        summary_reason = f"Automated checks failed: {', '.join(failed)}"
         risk_lines = [
-            f"- 실패한 자동 검증: {', '.join(failed)}",
-            "- 실패 원인을 수정한 뒤 동일 명령 세트를 다시 실행해야 함",
+            f"- Failed checks: {', '.join(failed)}",
+            "- Fix the failing checks and rerun this script before handoff.",
         ]
     else:
         gate_signal = "CONDITIONAL PASS"
-        summary_reason = "자동 검증은 통과했지만 수동 UI/API/사용자 흐름 검증이 아직 기록되지 않음"
+        summary_reason = "Automated checks passed, but manual UI/API validation is still missing."
         risk_lines = [
-            "- 자동 검증은 통과했지만 수동 사용자 흐름 검증은 아직 기록되지 않음",
-            "- 실제 운영/배포 리허설은 별도 증거로 남겨야 함",
+            "- Manual UI and API verification has not been recorded yet.",
+            "- Release should remain blocked until execution logs and reviewer notes are updated.",
         ]
 
     lines = [
         "# Execution Evidence",
         "",
         EXECUTION_HEADING,
-        f"- 실행 시각: {timestamp}",
-        f"- 워크스페이스 루트: `{root}`",
-        f"- 프로젝트 경로: `{project_dir}`",
-        f"- 자동 게이트 신호: {gate_signal}",
-        f"- 실행 명령 수: {len(results)}",
+        f"- Run time: {timestamp}",
+        f"- Workspace root: `{root}`",
+        f"- Project directory: `{project_dir}`",
+        f"- Automated gate signal: {gate_signal}",
+        f"- Checks executed: {len(results)}",
         "",
     ]
 
@@ -168,10 +171,10 @@ def build_evidence_markdown(root: Path, project_dir: Path, results: list[Result]
         lines.extend(
             [
                 f"### {result.label}",
-                f"- 상태: {result.status}",
-                f"- 명령: `{result.command}`",
-                f"- 소요 시간: {result.duration_seconds:.1f}s",
-                "- 출력 요약:",
+                f"- Status: {result.status}",
+                f"- Command: `{result.command}`",
+                f"- Duration: {result.duration_seconds:.1f}s",
+                "- Output:",
                 "```text",
                 result.output_excerpt,
                 "```",
@@ -182,10 +185,10 @@ def build_evidence_markdown(root: Path, project_dir: Path, results: list[Result]
     lines.extend(
         [
             SUMMARY_HEADING,
-            f"- 통과: {', '.join(passed) if passed else '(없음)'}",
-            f"- 실패: {', '.join(failed) if failed else '(없음)'}",
-            f"- 판정 제안: {gate_signal}",
-            f"- 판정 근거: {summary_reason}",
+            f"- Passed: {', '.join(passed) if passed else '(none)'}",
+            f"- Failed: {', '.join(failed) if failed else '(none)'}",
+            f"- Suggested gate signal: {gate_signal}",
+            f"- Reason: {summary_reason}",
             "",
             RISK_HEADING,
             *risk_lines,
@@ -202,43 +205,43 @@ def build_release_checklist(project_dir: Path, results: list[Result], gate_signa
 
     final_status = "BLOCKED"
     if failed:
-        reason = f"자동 검증 실패: {', '.join(failed)}"
-        blocked_resolution = "실패한 자동 검증을 수정한 뒤 quality_gate.py를 다시 실행하고, 수동 검증 로그를 추가한다."
+        reason = f"Automated checks failed: {', '.join(failed)}"
+        blocked_resolution = "Fix the failing checks, rerun quality_gate.py, and append new execution evidence."
     else:
-        reason = "자동 검증은 통과했지만 수동 UI/API/사용자 흐름 검증이 미기록 상태"
-        blocked_resolution = "최소 1회 UI/API/사용자 흐름 수동 검증을 execution-evidence에 추가하고 체크리스트를 갱신한다."
+        reason = "Automated checks passed, but manual UI/API/user-flow validation is still missing."
+        blocked_resolution = "Record at least one manual validation pass in execution-evidence.md and update review findings before release."
 
     lines = [
         "# Release Checklist",
         "",
         FINAL_DECISION_HEADING,
         f"- READY / BLOCKED: {final_status}",
-        f"- 판정 근거: {reason}",
-        f"- 자동 게이트: {gate_signal}",
+        f"- Reason: {reason}",
+        f"- Automated gate: {gate_signal}",
         "",
         FEATURE_HEADING,
-        "- [x] In-Scope 기능 문서 존재 확인",
-        f"- [{'x' if build_pass else ' '}] 실제 UI/API 동작 로그 확인",
-        "- [ ] 사용자 흐름 수동 검증 완료",
+        "- [x] In-scope feature docs are present",
+        f"- [{'x' if build_pass else ' '}] Production build completed",
+        "- [ ] Manual UI and API flow validation recorded",
         "",
         SECURITY_HEADING,
-        "- [ ] 인증/인가 동작 확인",
-        "- [ ] 입력 검증 로그 확인",
-        "- [x] 문서상 비밀값 직접 노출 없음",
+        "- [ ] Auth and access-control checks recorded",
+        "- [ ] Input validation and error handling reviewed",
+        "- [x] No secrets were printed into release docs",
         "",
         OPS_HEADING,
-        f"- [{'x' if build_pass else ' '}] 주요 화면 응답/빌드 상태 확인",
-        "- [ ] 에러 추적/알림 설정 확인",
-        "- [ ] 운영 runbook 작성",
+        f"- [{'x' if build_pass else ' '}] Core pages compiled in production build",
+        "- [ ] Monitoring and alerting expectations reviewed",
+        "- [ ] Runbook or rollback notes updated",
         "",
         EVIDENCE_HEADING,
-        f"- 테스트 결과: lint={'PASS' if lint_pass else 'N/A or FAIL'}, typecheck={'PASS' if typecheck_pass else 'N/A or FAIL'}",
-        f"- 빌드 결과: {'PASS' if build_pass else 'FAIL or NOT RUN'}",
-        f"- 수동 검증: 미기록 ({project_dir})",
+        f"- Test results: lint={'PASS' if lint_pass else 'FAIL'}, typecheck={'PASS' if typecheck_pass else 'FAIL'}",
+        f"- Build result: {'PASS' if build_pass else 'FAIL'}",
+        f"- Manual validation: pending ({project_dir})",
         "",
         BLOCKED_HEADING,
-        f"- 사유 1: {reason}",
-        f"- 해소 방법: {blocked_resolution}",
+        f"- Reason 1: {reason}",
+        f"- Resolution: {blocked_resolution}",
         "",
     ]
     return "\n".join(lines)
@@ -274,3 +277,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

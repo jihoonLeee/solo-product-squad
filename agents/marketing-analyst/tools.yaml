@@ -1,20 +1,19 @@
-tools:
+﻿tools:
   - name: file_read
-    description: "시장 조사 및 아이디어 문서 읽기"
+    description: Read stage inputs, contracts, and existing artifacts.
     parameters:
       path:
         type: string
         required: true
-        description: "읽을 파일 경로 (output/idea-brief.md, output/mvp-scope.md 등)"
-
+        description: Path to the file to read.
   - name: file_write
-    description: "마케팅 전략 산출물 저장"
+    description: Write or update the stage artifacts owned by this agent.
     parameters:
       path:
         type: string
         required: true
-        description: "저장할 파일 경로 (output/marketing/strategy.md, competitor-analysis.md, gtm-plan.md)"
+        description: Path to the file to write.
       content:
         type: string
         required: true
-        description: "저장할 마케팅 전략 내용"
+        description: Content to write.

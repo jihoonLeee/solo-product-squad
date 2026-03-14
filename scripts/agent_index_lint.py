@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Lint consistency between agents/INDEX.md and agent metadata files."""
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ def clean_items(value: str) -> list[str]:
 
 
 def parse_registry(index_path: Path) -> dict[str, dict[str, object]]:
-    lines = index_path.read_text(encoding="utf-8").splitlines()
+    lines = index_path.read_text(encoding="utf-8-sig").splitlines()
     in_registry = False
     records: dict[str, dict[str, object]] = {}
 
@@ -65,7 +65,7 @@ def parse_registry(index_path: Path) -> dict[str, dict[str, object]]:
 
 
 def parse_quick_index(agent_md_path: Path) -> dict[str, object]:
-    text = agent_md_path.read_text(encoding="utf-8")
+    text = agent_md_path.read_text(encoding="utf-8-sig")
     stage_match = re.search(r"^- Stage owner: `([^`]+)`", text, re.MULTILINE)
     inputs_match = re.search(r"^- Read first: (.+)$", text, re.MULTILINE)
     outputs_match = re.search(r"^- Produces: (.+)$", text, re.MULTILINE)
@@ -80,7 +80,7 @@ def parse_quick_index(agent_md_path: Path) -> dict[str, object]:
 
 
 def parse_agentcard(agentcard_path: Path) -> tuple[str | None, list[str]]:
-    lines = agentcard_path.read_text(encoding="utf-8").splitlines()
+    lines = agentcard_path.read_text(encoding="utf-8-sig").splitlines()
     name: str | None = None
     handoff_targets: list[str] = []
     in_handoff = False
@@ -102,7 +102,7 @@ def parse_agentcard(agentcard_path: Path) -> tuple[str | None, list[str]]:
 
 
 def parse_tool_names(tools_path: Path) -> list[str]:
-    lines = tools_path.read_text(encoding="utf-8").splitlines()
+    lines = tools_path.read_text(encoding="utf-8-sig").splitlines()
     return [line.strip().split(":", 1)[1].strip().strip('"') for line in lines if line.strip().startswith("- name:")]
 
 

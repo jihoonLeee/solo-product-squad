@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generate agents/INDEX.md from each agent's Quick Index."""
 
 from __future__ import annotations
@@ -14,11 +14,13 @@ INDEX_FILE = AGENTS_DIR / "INDEX.md"
 
 STAGE_ORDER = [
     "validate",
+    "marketing",
     "plan",
     "design",
     "architect",
     "build-frontend",
     "build-backend",
+    "security",
     "test",
     "review",
     "operate",
@@ -47,7 +49,7 @@ def split_items(value: str) -> list[str]:
 
 def parse_quick_index(agent_dir: Path) -> AgentRecord:
     agent_md = agent_dir / "AGENT.md"
-    text = agent_md.read_text(encoding="utf-8")
+    text = agent_md.read_text(encoding="utf-8-sig")
 
     stage_match = re.search(r"^- Stage owner: `([^`]+)`", text, re.MULTILINE)
     inputs_match = re.search(r"^- Read first: (.+)$", text, re.MULTILINE)
@@ -150,7 +152,7 @@ def main() -> int:
         sys.stdout.write(generated)
         return 0
 
-    current = INDEX_FILE.read_text(encoding="utf-8") if INDEX_FILE.exists() else ""
+    current = INDEX_FILE.read_text(encoding="utf-8-sig") if INDEX_FILE.exists() else ""
     if args.check:
         if current != generated:
             print("agents/INDEX.md is out of date")
@@ -158,10 +160,12 @@ def main() -> int:
         print("agents/INDEX.md is up to date")
         return 0
 
-    INDEX_FILE.write_text(generated, encoding="utf-8")
+    INDEX_FILE.write_text(generated, encoding="utf-8-sig")
     print(f"generated {INDEX_FILE}")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
